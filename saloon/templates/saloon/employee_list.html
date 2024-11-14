@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+  {% for employee in employees %}
+    <li>
+      <a href="{% url 'saloon:employee-detail' employee.pk %}">{{employee}}</a>
+    </li>
+  {% endfor %}
+  {% if user is davinci %}
+    <p><button onclick="location.href='{% url 'saloon:employee-create' %}' " type="button">новый сотрудник</button> </p>
+  {% endif %}
+{% endblock content %}

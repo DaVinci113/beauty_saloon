@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% if user.is_authenticated %}
+  Пользователь: {{ user.username }}
+  <form method="post" action="{% url 'users:logout' %}">
+    {% csrf_token %}
+    <button name="submit">Выйти</button>
+  </form>
+{% else %}
+  Вы не авторизованы. Для записи войдите в систему или позвоните по телефону 8-999-222-13-70
+  <p><button onclick="location.href='{% url 'users:login' %}'" type="button">Войти</button></p>
+{% endif %}
+<p></p>
+<a href="{% url 'saloon:home' %}">Гланая</a> |
+<a href="{% url 'saloon:employee-list' %}">Список сотрудников</a> |
+<a href="{% url 'saloon:services-list' %}">Список услуг</a>
+{% block content %}
+{% endblock content %}
+</body>
+</html>

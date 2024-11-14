@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+  <p>Услуги {{service}}</p>
+  Мастер:
+  {% for employee in service.specialization.all %}
+  <li>
+      <a href="{% url 'saloon:employee-detail' employee.pk %}">{{employee}}</a>
+  </li>
+  {% endfor %}
+{% endblock content %}
