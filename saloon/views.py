@@ -1,4 +1,4 @@
-from django.views.generic import ListView, TemplateView, DetailView, CreateView
+from django.views.generic import ListView, TemplateView, DetailView, CreateView, UpdateView
 from .models import Employee, Service
 
 
@@ -20,6 +20,14 @@ class ShowEmployeeDetail(DetailView):
     template_name = 'saloon/employee_detail.html'
     pk_url_kwarg = 'employee_pk'
     context_object_name = 'employee'
+    
+    
+class EmployeeUpdateView(UpdateView):
+    model = Employee
+    fields = '__all__'
+    template_name = 'saloon/create.html'
+    pk_url_kwarg = 'employee_pk'
+    success_url = '/employee_list'
     
     
 class SpecialityEmployeeList(DetailView):

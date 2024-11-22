@@ -5,7 +5,7 @@
       <a href="{% url 'saloon:employee-detail' employee.pk %}">{{employee}}</a>
     </li>
   {% endfor %}
-  {% if user is davinci %}
+  {% if username is davinci %}
     <p><button onclick="location.href='{% url 'saloon:employee-create' %}' " type="button">новый сотрудник</button> </p>
   {% endif %}
 {% endblock content %}
