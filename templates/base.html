@@ -6,8 +6,8 @@
 </head>
 <body>
 
-  Пользователь: {{ user.name }}
-{% if user.is_authenticate %}
+  Пользователь: {{ user }}
+{% if user.is_authenticated %}
   <form method="post" action="{% url 'users:logout' %}">
     {% csrf_token %}
     <button name="submit">Выйти</button>
