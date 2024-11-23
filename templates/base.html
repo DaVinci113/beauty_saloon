@@ -6,7 +6,12 @@
 </head>
 <body>
 {% if user.is_authenticated %}
-  Пользователь: {{ user }}
+  Пользователь:
+  {% if user.is_staff %}
+    {{ user.username }}
+  {% else %}
+    {{ user }}
+  {% endif %}
   <form method="post" action="{% url 'users:logout' %}">
     {% csrf_token %}
     <button name="submit">Выйти</button>
@@ -19,6 +24,9 @@
 <a href="{% url 'saloon:home' %}">Гланая</a> |
 <a href="{% url 'saloon:employee-list' %}">Список сотрудников</a> |
 <a href="{% url 'saloon:services-list' %}">Список услуг</a>
+{% if user.is_staff %}
+  | <a href="{% url 'saloon:client-list' %}">Список клиентов</a>
+{% endif %}
 {% block content %}
 {% endblock content %}
 </body>

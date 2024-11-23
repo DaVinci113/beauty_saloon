@@ -1,6 +1,9 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, TemplateView, DetailView, CreateView, UpdateView
-from .models import Employee, Service
+
+from users.forms import CustomUserCreate
+from users.models import User
+from .models import Employee, Service, Client
 
 
 # Create your views here.
@@ -56,3 +59,21 @@ class ServiceCreateView(CreateView):
     fields = '__all__'
     template_name = 'saloon/create.html'
     success_url = '/services_list'
+
+
+class ClientListView(ListView):
+    model = Client
+    fields = [
+        'last_name',
+        'name',
+        'phone_number',
+    ]
+    template_name = 'saloon/client_list.html'
+    context_object_name = 'clients'
+
+
+class ClientCreateView(CreateView):
+    model = Client
+    fields = '__all__'
+    template_name = 'users/register.html'
+    success_url = '/'

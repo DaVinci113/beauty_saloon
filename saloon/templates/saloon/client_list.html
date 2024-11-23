@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+  {% for client in clients %}
+  <ul>
+    <li>
+      {% if client.last_name %}
+        {{ client.last_name }}
+      {% endif %}
+      {{ client.name }}
+      {{ client.phone_number }}
+    </li>
+  </ul>
+  {% endfor %}
+  {% if user.is_staff %}
+    <p><button onclick="location.href='{% url 'saloon:client-create' %}' " type="button">новый клиент</button> </p>
+  {% endif %}
+{% endblock content %}
