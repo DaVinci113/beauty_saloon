@@ -7,7 +7,7 @@
       </li>
     </ul>
     {% endfor %}
-    {% if user is davinci %}
+    {% if user.is_staff %}
       <p><button onclick="location.href='{% url 'saloon:service-create' %}'" type="button">новая услуга</button></p>
     {% endif %}
   {% endblock content %}

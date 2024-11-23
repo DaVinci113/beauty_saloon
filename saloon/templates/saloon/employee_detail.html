@@ -1,12 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
-  <p>Услуги мастера {{employee}}</p>
+  <p>Услуги мастера {{employee}}
+    {% if user.is_staff %}
+      {{employee.last_name}}
+    {% endif %}
+  </p>
   {% for specialization in employee.specialization.all %}
   <li>
       {{specialization}}
   </li>
   {% endfor %}
-  {% if username is davinci %}
+  {% if user.is_staff %}
     <p><button onclick="location.href='{% url 'saloon:employee-update' employee.pk %}'" type="button">обновление</button></p>
   {% endif %}
 {% endblock content %}

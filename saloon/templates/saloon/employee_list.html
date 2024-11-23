@@ -3,11 +3,15 @@
   {% for employee in employees %}
   <ul>
     <li>
-      <a href="{% url 'saloon:employee-detail' employee.pk %}">{{employee}}</a>
+      <a href="{% url 'saloon:employee-detail' employee.pk %}">{{employee}}
+        {% if user.is_staff %}
+          {{employee.last_name}}
+        {% endif%}
+      </a>
     </li>
   </ul>
   {% endfor %}
-  {% if user is davinci %}
+  {% if user.is_staff %}
     <p><button onclick="location.href='{% url 'saloon:employee-create' %}' " type="button">новый сотрудник</button> </p>
   {% endif %}
 {% endblock content %}
