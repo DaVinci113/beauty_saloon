@@ -12,6 +12,9 @@ class Service(models.Model):
     
     def __str__(self):
         return f'{self.name} ~{self.price}руб'
+    
+    class Meta:
+        ordering = ['name']
 
 
 class Employee(models.Model):
@@ -22,6 +25,9 @@ class Employee(models.Model):
     
     def __str__(self):
         return f'{self.last_name} {self.name}'
+    
+    class Meta:
+        ordering = ['last_name', 'name']
     
     
 class Record(models.Model):
