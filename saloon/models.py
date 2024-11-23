@@ -24,7 +24,7 @@ class Employee(models.Model):
     birdth_data = models.DateField(verbose_name='Дата рождения')
     
     def __str__(self):
-        return f'{self.last_name} {self.name}'
+        return self.name
     
     class Meta:
         ordering = ['last_name', 'name']

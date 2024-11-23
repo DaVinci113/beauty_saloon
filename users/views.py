@@ -13,14 +13,3 @@ class RegisterView(CreateView):
     form_class = CustomUserCreate
     template_name = 'users/register.html'
     success_url = '/'
-    
-# class LoginUser(LoginView):
-#     form_class = AuthenticationForm
-#     template_name = 'users/login.html'
-#     extra_context = {'title': 'Авторизация'}
-#
-#
-# class LogoutUser(LogoutView):
-#     form_class = AuthenticationForm
-#     template_name = 'users:logout'
-#     extra_context = {'title': 'Выход'}

@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, TemplateView, DetailView, CreateView, UpdateView
 from .models import Employee, Service
 
@@ -9,13 +10,13 @@ class Index(TemplateView):
     template_name = 'saloon/index.html'
 
 
-class EmployeeListView(ListView):
+class EmployeeListView(LoginRequiredMixin, ListView):
     model = Employee
     template_name = 'saloon/employee_list.html'
     context_object_name = 'employees'
 
 
-class ShowEmployeeDetail(DetailView):
+class ShowEmployeeDetail(LoginRequiredMixin, DetailView):
     model = Employee
     template_name = 'saloon/employee_detail.html'
     pk_url_kwarg = 'employee_pk'
@@ -37,7 +38,7 @@ class EmployeeCreateView(CreateView):
     success_url = '/employee_list'
 
 
-class SpecialityEmployeeList(DetailView):
+class SpecialityEmployeeList(LoginRequiredMixin, DetailView):
     model = Service
     template_name = 'saloon/service_employee_list.html'
     pk_url_kwarg = 'service_pk'
