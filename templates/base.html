@@ -5,15 +5,14 @@
     <title>Title</title>
 </head>
 <body>
-
-  Пользователь: {{ user }}
 {% if user.is_authenticated %}
+  Пользователь: {{ user }}
   <form method="post" action="{% url 'users:logout' %}">
     {% csrf_token %}
     <button name="submit">Выйти</button>
   </form>
 {% else %}
-  Вы не авторизованы. Для записи войдите в систему или позвоните по телефону 8-999-222-13-70
+  <p>Вы не авторизованы. Для записи войдите в систему или позвоните по телефону 8-999-222-13-70</p>
   <p><button onclick="location.href='{% url 'users:login' %}'" type="button">Войти</button></p>
 {% endif %}
 <p></p>
