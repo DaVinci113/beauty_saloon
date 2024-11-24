@@ -1,5 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView, TemplateView, DetailView, CreateView, UpdateView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, TemplateView, DetailView, CreateView, UpdateView, DeleteView
 
 from users.forms import CustomUserCreate
 from users.models import User
@@ -76,4 +77,20 @@ class ClientCreateView(CreateView):
     model = Client
     fields = '__all__'
     template_name = 'users/register.html'
-    success_url = '/'
+    success_url = '/client_list'
+    
+    
+class ClientUpdateView(UpdateView):
+    model = Client
+    fields = '__all__'
+    template_name = 'saloon/create.html'
+    pk_url_kwarg = 'client_pk'
+    success_url = '/client_list'
+    
+    
+class ClientDeleteView(DeleteView):
+    model = Client
+    pk_url_kwarg = 'client_pk'
+    template_name = 'saloon/delete.html'
+    success_url = '/client_list'
+    
