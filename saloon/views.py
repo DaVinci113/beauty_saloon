@@ -36,6 +36,13 @@ class EmployeeUpdateView(UpdateView):
     template_name = 'saloon/create.html'
     pk_url_kwarg = 'employee_pk'
     success_url = '/employee_list'
+    
+    
+class EmployeeDeleteView(DeleteView):
+    model = Employee
+    pk_url_kwarg = 'employee_pk'
+    template_name = 'saloon/delete.html'
+    success_url = '/employee_list'
 
 
 class EmployeeCreateView(CreateView):
@@ -121,6 +128,8 @@ class GraficView(HTMLCalendar, TemplateView):
         date = datetime.now()
         year = date.year
         month = date.month
+        # year = 2024
+        # month = 12
         context['calendar_month'] = HTMLCalendar().formatmonth(year, month)
         if month < 12:
             context['calendar_next_month'] = HTMLCalendar().formatmonth(year, month+1)
