@@ -23,7 +23,8 @@
 <p></p>
 <a href="{% url 'saloon:home' %}">Гланая</a> |
 <a href="{% url 'saloon:employee-list' %}">Список сотрудников</a> |
-<a href="{% url 'saloon:services-list' %}">Список услуг</a>
+<a href="{% url 'saloon:services-list' %}">Список услуг</a> |
+<a href="{% url 'saloon:grafic' %}">График</a>
 {% if user.is_staff %}
   | <a href="{% url 'saloon:client-list' %}">Список клиентов</a>
 {% endif %}

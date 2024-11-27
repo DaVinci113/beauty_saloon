@@ -1,15 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-Пн Вт Ср Чт Пт Сб Вс
-<p>1 < 2  3  4  5  6  7 </p>
-<p>9  10 11 12 13 14 15</p>
-<p>16 17 18 19 20 21 22</p>
-<p>23 24 25 26 27 28 29</p>
-<p>30 31               </p>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block content %}
+  <p>{{calendar_month|safe}}</p>
+  <p>{{calendar_next_month|safe}}</p>
+{% endblock content %}

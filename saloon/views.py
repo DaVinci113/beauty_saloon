@@ -1,11 +1,13 @@
+from datetime import datetime
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.utils.html import escape
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, TemplateView, DetailView, CreateView, UpdateView, DeleteView
-
 from users.forms import CustomUserCreate
 from users.models import User
 from .models import Employee, Service, Client
+from calendar import HTMLCalendar
 
 
 # Create your views here.
@@ -111,6 +113,21 @@ class ClientDeleteView(DeleteView):
     success_url = '/client_list'
     
     
-class GraficView(TemplateView):
+class GraficView(HTMLCalendar, TemplateView):
     template_name = 'saloon/grafic.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        date = datetime.now()
+        year = date.year
+        month = date.month
+        context['calendar_month'] = HTMLCalendar().formatmonth(year, month)
+        if month < 12:
+            context['calendar_next_month'] = HTMLCalendar().formatmonth(year, month+1)
+        else:
+            context['calendar_next_month'] = HTMLCalendar().formatmonth(year+1, 1)
+        return context
+    
+        
+    
     
