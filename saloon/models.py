@@ -33,7 +33,7 @@ class Employee(models.Model):
 class Client(models.Model):
     name = models.CharField(max_length=20, verbose_name='Имя клиента')
     last_name = models.CharField(null=True, blank=True, max_length=25, verbose_name='Фамилия клиента')
-    phone_number = models.IntegerField(max_length=12, verbose_name='Номер телефона')
+    phone_number = models.IntegerField(verbose_name='Номер телефона')
     
     def __str__(self):
         return f'{self.last_name} {self.name} {self.phone_number}'

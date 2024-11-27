@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, TemplateView, DetailView, CreateView, UpdateView, DeleteView
 
@@ -60,6 +61,21 @@ class ServiceCreateView(CreateView):
     fields = '__all__'
     template_name = 'saloon/create.html'
     success_url = '/services_list'
+    
+    
+class ServiceUpdateView(UpdateView):
+    model = Service
+    fields = '__all__'
+    template_name = 'saloon/create.html'
+    pk_url_kwarg = 'service_pk'
+    success_url = '/services_list'
+    
+    
+class ServiceDeleteView(DeleteView):
+    model = Service
+    pk_url_kwarg = 'service_pk'
+    template_name = 'saloon/delete.html'
+    success_url = '/services_list'
 
 
 class ClientListView(ListView):
@@ -93,4 +109,8 @@ class ClientDeleteView(DeleteView):
     pk_url_kwarg = 'client_pk'
     template_name = 'saloon/delete.html'
     success_url = '/client_list'
+    
+    
+class GraficView(TemplateView):
+    template_name = 'saloon/grafic.html'
     

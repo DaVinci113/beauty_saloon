@@ -8,10 +8,8 @@
       {% endif %}
       {{ client.name }}
       {{ client.phone_number }}
-      <p>
-        <button onclick="location.href='{% url 'saloon:client-update' client.pk %}' " type="button">обновить</button>
-        <button onclick="location.href='{% url 'saloon:client-delete' client.pk %}' " type="button">удалить</button>
-      </p>
+      <button onclick="location.href='{% url 'saloon:client-update' client.pk %}' " type="button">обновить</button>
+      <button onclick="location.href='{% url 'saloon:client-delete' client.pk %}' " type="button">удалить</button>
     </li>
   </ul>
   {% endfor %}
