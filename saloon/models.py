@@ -43,11 +43,12 @@ class Client(models.Model):
 
 
 class Record(models.Model):
-    client = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Клиент')
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, verbose_name='Клиент')
     service = models.ForeignKey(Service, on_delete=models.CASCADE, verbose_name='Услуга')
     employee = models.ForeignKey(Employee, on_delete=models.PROTECT, verbose_name='Мастер')
-    date = models.DateField(verbose_name='Назначенное время')
+    record_date = models.DateField(verbose_name='Назначенная дата')
+    record_time = models.TimeField(verbose_name='Назначенное время')
     registration_date = models.DateField(auto_now_add=True, verbose_name='Время регистрации записи')
     
     def __str__(self):
-        return f'{self.client} {self.date}'
+        return f'{self.client} {self.record_date} {self.record_date}'

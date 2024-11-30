@@ -1,5 +1,10 @@
-<form method="post">
+{% extends 'base.html' %}
+{% block content%}
+<form method="get">
   {% csrf_token %}
-  {{ form.as_p }}
+  {{form.as_p}}
+  <input type="date" value={{current_date}} min={{current_date}}>
+  <input type="time" value={{current_time}}>
   <button type="submit">Подтвердить</button>
 </form>
+{% endblock content %}

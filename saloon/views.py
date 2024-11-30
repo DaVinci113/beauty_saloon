@@ -1,12 +1,9 @@
-from datetime import datetime
+from datetime import datetime as dt
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.utils.html import escape
-from django.shortcuts import render
-from django.urls import reverse_lazy
 from django.views.generic import ListView, TemplateView, DetailView, CreateView, UpdateView, DeleteView
-from users.forms import CustomUserCreate
-from users.models import User
-from .models import Employee, Service, Client
+
+from .forms import RecordForm
+from .models import Employee, Service, Client, Record
 from calendar import HTMLCalendar
 
 
@@ -137,6 +134,16 @@ class GraficView(HTMLCalendar, TemplateView):
             context['calendar_next_month'] = HTMLCalendar().formatmonth(year+1, 1)
         return context
     
+    
+class RecordCreateView(CreateView):
+    form_class = RecordForm
+    template_name = 'saloon/create.html'
+    success_url = '/'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        today = dt.today()
+        context['current_date'] = dt.strftime(today, '%Y-%m-%d')
+        context['current_time'] = dt.strftime(today, '%H:%M')
+        return context
         
-    
-    
