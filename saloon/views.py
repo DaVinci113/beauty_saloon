@@ -122,7 +122,7 @@ class GraficView(HTMLCalendar, TemplateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        date = datetime.now()
+        date = dt.now()
         year = date.year
         month = date.month
         # year = 2024
@@ -137,7 +137,7 @@ class GraficView(HTMLCalendar, TemplateView):
     
 class RecordCreateView(CreateView):
     form_class = RecordForm
-    template_name = 'saloon/create.html'
+    template_name = 'saloon/record_create.html'
     success_url = '/'
     
     def get_context_data(self, **kwargs):

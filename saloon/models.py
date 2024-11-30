@@ -48,7 +48,7 @@ class Record(models.Model):
     employee = models.ForeignKey(Employee, on_delete=models.PROTECT, verbose_name='Мастер')
     record_date = models.DateField(verbose_name='Назначенная дата')
     record_time = models.TimeField(verbose_name='Назначенное время')
-    registration_date = models.DateField(auto_now_add=True, verbose_name='Время регистрации записи')
+    registration_date = models.DateTimeField(auto_now_add=True, verbose_name='Время регистрации записи')
     
     def __str__(self):
         return f'{self.client} {self.record_date} {self.record_date}'
