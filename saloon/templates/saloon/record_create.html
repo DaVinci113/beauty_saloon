@@ -3,8 +3,8 @@
 <form method="post">
   {% csrf_token %}
   {{form.as_p}}
-  <input type="date" value={{current_date}} min={{current_date}}>
-  <input type="time" value={{current_time}}>
-  <button type="submit">Подтвердить</button>
+  <p>Дата записи: <input type="date" value={{current_date}} min={{current_date}} name="input_date"></p>
+  <p>Время записи: <input type="time" name="input_time"></p>
+  <p><button type="submit">Подтвердить</button></p>
 </form>
 {% endblock content %}

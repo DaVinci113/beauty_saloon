@@ -1,8 +1,7 @@
 from datetime import datetime as dt
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import render, redirect
 from django.views.generic import ListView, TemplateView, DetailView, CreateView, UpdateView, DeleteView
-
-from .forms import RecordForm
 from .models import Employee, Service, Client, Record
 from calendar import HTMLCalendar
 
@@ -136,7 +135,8 @@ class GraficView(HTMLCalendar, TemplateView):
     
     
 class RecordCreateView(CreateView):
-    form_class = RecordForm
+    model = Record
+    fields = ['client', 'service', 'employee']
     template_name = 'saloon/record_create.html'
     success_url = '/'
     
@@ -146,4 +146,20 @@ class RecordCreateView(CreateView):
         context['current_date'] = dt.strftime(today, '%Y-%m-%d')
         context['current_time'] = dt.strftime(today, '%H:%M')
         return context
+    
+    def post(self, request, *args, **kwargs):
+        client = Client.objects.get(pk=self.request.POST['client'])
+        service = Service.objects.get(pk=self.request.POST['service'])
+        employee = Employee.objects.get(pk=self.request.POST['employee'])
+        date = self.request.POST['input_date']
+        time = self.request.POST['input_time']
+        record = Record(
+            client=client,
+            service=service,
+            employee=employee,
+            record_date=date,
+            record_time=time,
+        )
+        record.save()
+        return redirect('saloon:home')
         
