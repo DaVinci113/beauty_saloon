@@ -36,7 +36,7 @@ class Client(models.Model):
     phone_number = models.IntegerField(verbose_name='Номер телефона')
     
     def __str__(self):
-        return f'{self.last_name} {self.name} {self.phone_number}'
+        return f'тел: {self.phone_number} {self.last_name} {self.name}'
     
     class Meta:
         ordering = ['last_name', 'name', 'phone_number']
@@ -50,5 +50,8 @@ class Record(models.Model):
     record_time = models.TimeField(verbose_name='Назначенное время')
     registration_date = models.DateTimeField(auto_now_add=True, verbose_name='Время регистрации записи')
     
+    class Meta:
+        ordering = ['record_date', 'record_time']
+    
     def __str__(self):
-        return f'{self.client} {self.record_date} {self.record_date}'
+        return f'{self.client} \n дата записи: {self.record_date} время: {self.record_time}'

@@ -4,11 +4,12 @@
   {% for client in clients %}
   <ul>
     <li>
+      тел: {{ client.phone_number }}
       {% if client.last_name %}
         {{ client.last_name }}
       {% endif %}
       {{ client.name }}
-      {{ client.phone_number }}
+
       <button onclick="location.href='{% url 'saloon:client-update' client.pk %}' " type="button">обновить</button>
       <button onclick="location.href='{% url 'saloon:client-delete' client.pk %}' " type="button">удалить</button>
     </li>

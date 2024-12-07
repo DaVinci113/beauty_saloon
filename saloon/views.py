@@ -134,6 +134,12 @@ class GraficView(HTMLCalendar, TemplateView):
         return context
     
     
+class RecordListView(ListView):
+    model = Record
+    template_name = 'saloon/record_list.html'
+    context_object_name = 'records'
+    
+    
 class RecordCreateView(CreateView):
     model = Record
     fields = ['client', 'service', 'employee']

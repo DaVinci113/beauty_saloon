@@ -27,6 +27,7 @@
 {% if user.is_staff %}
   | <a href="{% url 'saloon:client-list' %}">Список клиентов</a> |
   <a href="{% url 'saloon:grafic' %}">График</a> |
+  <a href="{% url 'saloon:record-list' %}">Список записей</a> |
   <a href="{% url 'saloon:record-create' %}">Создать запись</a>
 {% endif %}
 {% block content %}
