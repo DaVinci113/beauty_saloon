@@ -1,5 +1,5 @@
 from datetime import datetime as dt
-from django.contrib.auth.mixins import LoginRequiredMixin
+# from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, TemplateView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Employee, Service, Client, Record
@@ -13,13 +13,13 @@ class Index(TemplateView):
     template_name = 'saloon/index.html'
 
 
-class EmployeeListView(LoginRequiredMixin, ListView):
+class EmployeeListView(ListView):
     model = Employee
     template_name = 'saloon/employee_list.html'
     context_object_name = 'employees'
 
 
-class ShowEmployeeDetail(LoginRequiredMixin, DetailView):
+class ShowEmployeeDetail(DetailView):
     model = Employee
     template_name = 'saloon/employee_detail.html'
     pk_url_kwarg = 'employee_pk'
@@ -48,7 +48,7 @@ class EmployeeCreateView(CreateView):
     success_url = '/employee_list'
 
 
-class SpecialityEmployeeList(LoginRequiredMixin, DetailView):
+class SpecialityEmployeeList(DetailView):
     model = Service
     template_name = 'saloon/service_employee_list.html'
     pk_url_kwarg = 'service_pk'
