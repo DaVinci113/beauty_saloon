@@ -21,7 +21,7 @@ class Employee(models.Model):
     name = models.CharField(max_length=50, verbose_name='Имя')
     last_name = models.CharField(max_length=50, verbose_name='Фамилия')
     specialization = models.ManyToManyField(Service, verbose_name='Услуги мастера', related_name='specialization')
-    birdth_data = models.DateField(verbose_name='Дата рождения')
+    birdth_data = models.DateField(verbose_name='Дата рождения (в формате: ГГГГ-ММ-ДД)')
     
     def __str__(self):
         return self.name
