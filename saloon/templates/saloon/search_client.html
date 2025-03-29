@@ -7,10 +7,12 @@
 <body>
 {% extends 'base.html' %}
 {% block content %}
+  <ul>
   <form action="{% url 'saloon:search-client' %}">
       <input type="search" name="search">
       <button type="submit">Поиск</button>
   </form>
+  </ul>
 {% for obj in object_list %}
   {{obj}}
 {% endfor %}
