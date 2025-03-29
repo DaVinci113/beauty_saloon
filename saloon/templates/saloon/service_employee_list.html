@@ -6,6 +6,7 @@
     <ul>
       <li>
         <a href="{% url 'saloon:employee-detail' employee.pk %}">{{employee}}</a>
+        <button onclick="location.href='{% url 'saloon:record-create-by' service.pk employee.pk %}' " type="button">запись</button>
       </li>
     </ul>
   {% endfor %}

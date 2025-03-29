@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 {% block content%}
+{{data}}
+<p>Запись</p>
+<p>Услуга: {{object.items}}</p>
+<p>Мастер: {{employee}}</p>
 <form method="post">
   {% csrf_token %}
   {{ form.as_p }}

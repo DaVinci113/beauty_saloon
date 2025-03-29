@@ -4,7 +4,9 @@
     {% for service in services %}
     <ul>
       <li>
-        <a href="{% url 'saloon:service_employee_list' service.pk %}">{{ service }}</a>
+        <a href="{% url 'saloon:service_employee_list' service.pk %}">
+            {{ service }}
+        </a>
         {% if user.is_staff %}
         <button onclick="location.href='{% url 'saloon:service-update' service.pk %}' " type="button">обновить</button>
         <button onclick="location.href='{% url 'saloon:service-delete' service.pk %}' " type="button">удалить</button>

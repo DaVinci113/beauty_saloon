@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% extends 'base.html' %}
+{% block content %}
+  <form action="{% url 'saloon:search-client' %}">
+      <input type="search" name="search">
+      <button type="submit">Поиск</button>
+  </form>
+{% for obj in object_list %}
+  {{obj}}
+{% endfor %}
+{% endblock content %}
+
+</body>
+</html>

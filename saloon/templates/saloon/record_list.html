@@ -1,10 +1,18 @@
 {% extends 'base.html' %}
+
+<a href="#" id="clickme">page name</a>
+
 {% block content %}
-<p>СПИСОК ЗАПИСЕЙ</p>
-  {% for record in records %}
-    <li>
-      {{ record.client }}
-      <p>{{ record.employee }} {{ record.record_date }} {{ record.record_time }}</p>
-    </li>
-  {% endfor %}
+  <div id="content">
+    <p>СПИСОК ЗАПИСЕЙ</p>
+    {% for record in records %}
+        <ul>
+          <li>
+          {{ record.client }}
+          <p>{{ record.employee }} {{ record.record_date }} {{ record.record_time }}</p>
+          </li>
+        </ul>
+    {% endfor %}
+  </div>
 {% endblock content %}
+

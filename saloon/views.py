@@ -1,6 +1,9 @@
 from datetime import datetime as dt
+
+from django.contrib.messages import success
 # from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from django.views.generic import ListView, TemplateView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Employee, Service, Client, Record
 from calendar import HTMLCalendar
@@ -144,15 +147,14 @@ class RecordCreateView(CreateView):
     model = Record
     fields = ['client', 'service', 'employee']
     template_name = 'saloon/record_create.html'
-    success_url = '/'
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         today = dt.today()
         context['current_date'] = dt.strftime(today, '%Y-%m-%d')
         context['current_time'] = dt.strftime(today, '%H:%M')
         return context
-    
+
     def post(self, request, *args, **kwargs):
         client = Client.objects.get(pk=self.request.POST['client'])
         service = Service.objects.get(pk=self.request.POST['service'])
@@ -168,4 +170,45 @@ class RecordCreateView(CreateView):
         )
         record.save()
         return redirect('saloon:home')
-        
+
+
+class RecordCreateByView(CreateView):
+    model = Record
+    fields = ['client']
+    template_name = 'saloon/record_create_by.html'
+
+    def get_context_data(self, **kwargs):
+        data = self.request.GET.get('service')
+        context = super().get_context_data(**kwargs)
+        context['data'] = data
+        today = dt.today()
+        context['current_date'] = dt.strftime(today, '%Y-%m-%d')
+        context['current_time'] = dt.strftime(today, '%H:%M')
+        return context
+
+    def post(self, request, *args, **kwargs):
+        client = Client.objects.get(pk=self.request.POST['client'])
+        employee = self.request.GET['employee_pk']
+        date = self.request.POST['input_date']
+        time = self.request.POST['input_time']
+        record = Record(
+            client=client,
+            employee=employee,
+            record_date=date,
+            record_time=time,
+        )
+        record.save()
+        return redirect('saloon:home')
+
+
+class SearchClient(ListView):
+
+    template_name = 'saloon/search_client.html'
+
+    def get_queryset(self):
+        return Client.objects.filter(phone_number=self.request.GET.get('search'))
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data()
+        context['search'] = self.request.GET.get('search')
+        return context

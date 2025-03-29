@@ -21,5 +21,6 @@ urlpatterns = [
     path('grafic/', GraficView.as_view(), name='grafic'),
     path('record_list/', RecordListView.as_view(), name='record-list'),
     path('record_create/', RecordCreateView.as_view(), name='record-create'),
-    
+    path('record_create/<int:service_pk>/<int:employee_pk>/', RecordCreateByView.as_view(), name='record-create-by'),
+    path('search_client/', SearchClient.as_view(), name='search-client'),
 ]
