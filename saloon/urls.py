@@ -20,7 +20,7 @@ urlpatterns = [
     path('client_list/<int:client_pk>/delete/', ClientDeleteView.as_view(), name='client-delete'),
     path('grafic/', GraficView.as_view(), name='grafic'),
     path('record_list/', RecordListView.as_view(), name='record-list'),
-    path('record_create/', RecordCreateView.as_view(), name='record-create'),
-    path('record_create/<int:service_pk>/<int:employee_pk>/', RecordCreateByView.as_view(), name='record-create-by'),
+    path('record_create/<int:service_pk>/<int:employee_pk>/<int:client_pk>/', RecordCreateView.as_view(), name='record-create'),
     path('search_client/', SearchClient.as_view(), name='search-client'),
+    path('search_client/<int:service_pk>/<int:employee_pk>/', SearchClientForOrder.as_view(), name='search-client-for-order'),
 ]

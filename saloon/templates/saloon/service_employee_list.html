@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
-  <p>Услуги {{service}}</p>
+  <p>Услуга: {{service}}</p>
   Мастер:
   {% for employee in service.specialization.all %}
     <ul>
       <li>
-        <a href="{% url 'saloon:employee-detail' employee.pk %}">{{employee}}</a>
-        <button onclick="location.href='{% url 'saloon:record-create-by' service.pk employee.pk %}' " type="button">запись</button>
+        {{employee}}
+        <button onclick="location.href='{% url 'saloon:search-client-for-order' service.pk employee.pk %}' " type="button">ЗАПИСЬ</button>
       </li>
     </ul>
   {% endfor %}

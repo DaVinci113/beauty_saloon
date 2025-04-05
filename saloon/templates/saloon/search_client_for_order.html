@@ -8,13 +8,13 @@
 {% extends 'base.html' %}
 {% block content %}
   <ul>
-  <form action="{% url 'saloon:search-client' %}">
+  <form action="{% url 'saloon:search-client-for-order' data.service_pk data.employee_pk %}">
       <input type="search" name="search">
       <button type="submit">Поиск</button>
   </form>
   </ul>
 {% for obj in object_list %}
-   {{obj}}
+   {{obj}}<button onclick="location.href='{% url 'saloon:record-create' data.service_pk data.employee_pk obj.pk %}' " type="button">запись</button>
 {% endfor %}
 {% endblock content %}
 

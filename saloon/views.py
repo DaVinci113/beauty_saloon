@@ -57,11 +57,20 @@ class SpecialityEmployeeList(DetailView):
     pk_url_kwarg = 'service_pk'
     context_object_name = 'service'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context['data'] = self.kwargs
+        return context
 
 class ServicesListView(ListView):
     model = Service
     template_name = 'saloon/services_list.html'
     context_object_name = 'services'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data()
+        context['data'] = self.kwargs
+        return context
 
 
 class ServiceCreateView(CreateView):
@@ -127,8 +136,6 @@ class GraficView(HTMLCalendar, TemplateView):
         date = dt.now()
         year = date.year
         month = date.month
-        # year = 2024
-        # month = 12
         context['calendar_month'] = HTMLCalendar().formatmonth(year, month)
         if month < 12:
             context['calendar_next_month'] = HTMLCalendar().formatmonth(year, month+1)
@@ -145,7 +152,7 @@ class RecordListView(ListView):
     
 class RecordCreateView(CreateView):
     model = Record
-    fields = ['client', 'service', 'employee']
+    fields = []
     template_name = 'saloon/record_create.html'
 
     def get_context_data(self, **kwargs):
@@ -153,46 +160,18 @@ class RecordCreateView(CreateView):
         today = dt.today()
         context['current_date'] = dt.strftime(today, '%Y-%m-%d')
         context['current_time'] = dt.strftime(today, '%H:%M')
+        print(self.kwargs)
         return context
 
     def post(self, request, *args, **kwargs):
-        client = Client.objects.get(pk=self.request.POST['client'])
-        service = Service.objects.get(pk=self.request.POST['service'])
-        employee = Employee.objects.get(pk=self.request.POST['employee'])
+        client = Client.objects.get(pk=self.kwargs['client_pk'])
+        service = Service.objects.get(pk=self.kwargs['service_pk'])
+        employee = Employee.objects.get(pk=self.kwargs['employee_pk'])
         date = self.request.POST['input_date']
         time = self.request.POST['input_time']
         record = Record(
             client=client,
             service=service,
-            employee=employee,
-            record_date=date,
-            record_time=time,
-        )
-        record.save()
-        return redirect('saloon:home')
-
-
-class RecordCreateByView(CreateView):
-    model = Record
-    fields = ['client']
-    template_name = 'saloon/record_create_by.html'
-
-    def get_context_data(self, **kwargs):
-        data = self.request.GET.get('service')
-        context = super().get_context_data(**kwargs)
-        context['data'] = data
-        today = dt.today()
-        context['current_date'] = dt.strftime(today, '%Y-%m-%d')
-        context['current_time'] = dt.strftime(today, '%H:%M')
-        return context
-
-    def post(self, request, *args, **kwargs):
-        client = Client.objects.get(pk=self.request.POST['client'])
-        employee = self.request.GET['employee_pk']
-        date = self.request.POST['input_date']
-        time = self.request.POST['input_time']
-        record = Record(
-            client=client,
             employee=employee,
             record_date=date,
             record_time=time,
@@ -211,4 +190,18 @@ class SearchClient(ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data()
         context['search'] = self.request.GET.get('search')
+        return context
+
+
+class SearchClientForOrder(ListView):
+
+    template_name = 'saloon/search_client_for_order.html'
+
+    def get_queryset(self):
+        return Client.objects.filter(phone_number=self.request.GET.get('search'))
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data()
+        context['search'] = self.request.GET.get('search')
+        context['data'] = self.kwargs
         return context
