@@ -157,10 +157,12 @@ class RecordCreateView(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['service'] = Service.objects.get(pk=self.kwargs['service_pk'])
+        context['employee'] = Employee.objects.get(pk=self.kwargs['employee_pk'])
+        context['client'] = Client.objects.get(pk=self.kwargs['client_pk'])
         today = dt.today()
         context['current_date'] = dt.strftime(today, '%Y-%m-%d')
         context['current_time'] = dt.strftime(today, '%H:%M')
-        print(self.kwargs)
         return context
 
     def post(self, request, *args, **kwargs):
